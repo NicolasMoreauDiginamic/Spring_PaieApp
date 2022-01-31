@@ -1,27 +1,26 @@
 package dev.paie.exec;
 
-import java.util.List;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 
-import dev.paie.entites.Cotisation;
+import dev.paie.repositories.CotisationRepository;
 
 @Controller
-@Profile("nextCotisation")
+@Profile("listCotisation")
 public class ListeCotisations implements CommandLineRunner {
 	
-	private List<Cotisation> listeCoti;
-
-	public ListeCotisations(List<Cotisation> listeCoti) {
-		super();
-		this.listeCoti = listeCoti;
+	private CotisationRepository cotiRepo;
+	
+	public void ListerCotisation(CotisationRepository cotiRepo) {
+		this.cotiRepo = cotiRepo;
 	}
 	
 	@Override
 	public void run(String... args) throws Exception{
-		
+		this.cotiRepo
+		.findAll()
+		.forEach(System.out::println);
 	}
 
 }
