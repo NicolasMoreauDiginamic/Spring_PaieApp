@@ -1,9 +1,12 @@
 package dev.paie.exec;
 
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 
+import dev.paie.entites.Cotisation;
 import dev.paie.repositories.CotisationRepository;
 
 @Controller
@@ -18,9 +21,12 @@ public class ListeCotisations implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception{
-		this.cotiRepo
-		.findAll()
-		.forEach(System.out::println);
+		List<Cotisation> listCoti = cotiRepo.findAll();
+		
+		for(Cotisation uneCoti : listCoti) {
+			System.out.println(uneCoti.getCode() + " " + uneCoti.getLibelle());
+		}
+		
 	}
 
 }
